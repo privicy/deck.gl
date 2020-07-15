@@ -54,7 +54,11 @@ function diffTransitions(props, oldProps) {
     const propType = propTypes[key];
     const type = propType && propType.type;
     const isTransitionable = type === 'number' || type === 'color' || type === 'array';
-    if (isTransitionable && comparePropValues(props[key], oldProps[key], propType)) {
+    if (
+      isTransitionable &&
+      Object.hasOwnProperty.call(oldProps, key) &&
+      comparePropValues(props[key], oldProps[key], propType)
+    ) {
       result[key] = true;
     }
   }
